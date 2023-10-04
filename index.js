@@ -4,16 +4,29 @@ const message = document.querySelector('#message');
 
 function deleteMovie(event){
     event.target.parentNode.remove();
-    message.textContent = 'Movie Deleted!';
+    const movieItem = event.target.parentNode;
+    const movieTitle = movieItem.querySelector('span').textContent;
+    message.textContent =  `${movieTitle} deleted!`;
+    revealMessage();
 }
 
 function crossOffMovie(event){
     event.target.classList.toggle('checked');
+    const movieItem = event.target.parentNode;
+    const movieTitle = movieItem.querySelector('span').textContent;
     if(event.target.classList.contains('checked')){
-        message.textContent = 'Movie Watched!';
+        message.textContent = `${movieTitle} watched!`;
     }else{
-        message.textContent = 'Movie Unwatched!'
+        message.textContent = `${movieTitle} added back!`
     }
+    revealMessage();
+}
+
+function revealMessage(){
+    message.classList.remove('hide');
+    setTimeout(function(){
+        message.classList.add('hide');
+    }, 1000)
 }
 
 function addMovie(event){
